@@ -51,8 +51,8 @@ class SketchDataset(Dataset):
         sketch_file = self.list_sketch[index]
         photo_path = os.path.join(self.root_dir_photos, photo_file)
         sketch_path = os.path.join(self.root_dir_sketch, sketch_file)
-        photo = Image.open(photo_path)
-        sketch = Image.open(sketch_path)
+        photo = np.array(Image.open(photo_path))
+        sketch = np.array(Image.open(sketch_path))
 
         augments = both_transform(image=photo, image0=sketch)
         input_image, target_image = augments["image"], augments["image0"]
