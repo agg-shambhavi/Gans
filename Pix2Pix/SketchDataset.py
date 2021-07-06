@@ -23,13 +23,15 @@ transform_only_sketch = A.Compose(
 )
 
 transform_only_photos = A.Compose(
-    A.ColorJitter(p=0.11),
-    A.Normalize(
-        mean=[0.5, 0.5, 0.5],
-        std=[0.5, 0.5, 0.5],
-        max_pixel_value=255.0,
-    ),
-    ToTensorV2(),
+    [
+        A.ColorJitter(p=0.11),
+        A.Normalize(
+            mean=[0.5, 0.5, 0.5],
+            std=[0.5, 0.5, 0.5],
+            max_pixel_value=255.0,
+        ),
+        ToTensorV2(),
+    ]
 )
 
 
