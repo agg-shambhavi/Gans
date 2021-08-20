@@ -5,3 +5,16 @@ Conversion of handmade sketchs of people to realistic photographs using Pix2Pix 
 I got these results after training for 40 epochs. <br>
 Work In Progress 🚧<br>
 I am working on improving the model. Hoping for better results. 🤞
+
+### Citation
+
+```
+@misc{isola2018imagetoimage,
+      title={Image-to-Image Translation with Conditional Adversarial Networks}, 
+      author={Phillip Isola and Jun-Yan Zhu and Tinghui Zhou and Alexei A. Efros},
+      year={2018},
+      eprint={1611.07004},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
