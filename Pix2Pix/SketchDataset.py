@@ -1,9 +1,8 @@
 from PIL import Image
 import numpy as np
 import os
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, DataLoader
 import torch
-import cv2
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 
@@ -24,7 +23,7 @@ transform_only_sketch = A.Compose(
 
 transform_only_photos = A.Compose(
     [
-        A.ColorJitter(p=0.11),
+
         A.Normalize(
             mean=[0.5, 0.5, 0.5],
             std=[0.5, 0.5, 0.5],
@@ -55,9 +54,17 @@ class SketchDataset(Dataset):
         sketch = np.array(Image.open(sketch_path))
 
         augments = both_transform(image=photo, image0=sketch)
-        input_image, target_image = augments["image"], augments["image0"]
+        input_image, target_image = augments["image0"], augments["image"]
 
         input_image = transform_only_sketch(image=input_image)["image"]
         target_image = transform_only_photos(image=target_image)["image"]
 
         return input_image, target_image
+
+
+if __name__ == "__main__":
+    dataset = SketchDataset(root_dir_photos="G:/Gans/Pix2Pix/Data/CUHK_testing_photo/testing photo", root_dir_sketch="G:/Gans/Pix2Pix/Data/CUHK_testing_sketch/testing sketch")
+    loader = DataLoader(dataset, batch_size=5)
+    for x, y in loader:
+        print(x.shape)
+        print(y.shape)
